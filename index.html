@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Engineering portfolio of Zehua Liu. CAD, additive manufacturing, interconnect reliability, and microstructure characterization.">
+  <title>Zehua Liu | Engineering Portfolio</title>
+  <link rel="stylesheet" href="styles.css?v=monochrome">
+  <script type="importmap">
+    {"imports":{"three":"./vendor/three/three.module.js"}}
+  </script>
+  <script defer src="portfolio.js?v=paired-ebsd"></script>
+  <script type="module" src="inspection.js"></script>
+</head>
+<body>
+  <a class="skip" href="#work">Skip to projects</a>
+  <header class="masthead">
+    <div class="wrap masthead-inner">
+      <a class="wordmark" href="#">Zehua Liu <span>Engineering Portfolio</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#work">Work</a>
+        <a href="#inspection">Inspection</a>
+        <a href="#about">About</a>
+        <a class="nav-contact" href="https://www.linkedin.com/in/zehualiu-cmu">LinkedIn</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Materials engineering · CAD · Reliability</p>
+          <h1>Materials engineering<br>from CAD to test.</h1>
+          <p class="intro">I’m Zehua Liu, a materials science and engineering Ph.D. researcher at Carnegie Mellon University. I work on manufacturing, materials characterization, and experimental reliability.</p>
+          <a class="button primary" href="#work">Explore selected work</a>
+        </div>
+        <img class="hero-lattice" src="assets/diamond-transparent.webp" width="1000" height="880" alt="Ivory rendering of the reconstructed Sheet-Diamond TPMS lattice" fetchpriority="high">
+      </div>
+    </section>
+
+    <section class="wrap overview" id="work" aria-labelledby="work-title">
+      <div class="overview-title">
+        <h2 id="work-title">Selected work</h2>
+      </div>
+      <a class="featured-project" href="#inspection">
+        <div>
+          <p class="eyebrow">Interactive case study</p>
+          <h3>Manufacturing inspection</h3>
+          <p>Explore a modular fixture in 3D and inspect annotated bare-board defects.</p>
+          <span class="text-link">Open case study</span>
+        </div>
+        <img src="assets/inspection-fixture.webp" width="880" height="620" alt="" loading="lazy">
+      </a>
+      <div class="project-grid">
+        <a class="project-link" href="#diamond">
+          <img src="assets/porosity/70.webp" alt="" width="880" height="620">
+          <div><p class="eyebrow">Published research</p><h3>Sheet-Diamond lattice</h3><span>TPMS geometry and compression</span></div>
+        </a>
+        <a class="project-link" href="#coupon">
+          <img src="assets/coupon-exploded.webp" alt="" width="880" height="620">
+          <div><p class="eyebrow">M.Eng. project</p><h3>Conductive adhesive coupon</h3><span>Four-wire measurement and lap-joint design</span></div>
+        </a>
+        <a class="project-link" href="#nest">
+          <img src="assets/nest-exploded.webp" alt="" width="880" height="620">
+          <div><p class="eyebrow">New CAD concept</p><h3>Coupon handling nest</h3><span>Fixture assembly and dimensioned drawing</span></div>
+        </a>
+        <a class="project-link" href="#recrystallization">
+          <img class="map-card" src="assets/rx-ipfz-14.webp" alt="Final-stage (t14) inverse pole figure map" width="1144" height="858" loading="lazy">
+          <div><p class="eyebrow">Ph.D. research</p><h3>Aluminum recrystallization</h3><span>15-stage EBSD sequence in IPF-Z and OSM</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="inspection case-band" id="inspection" aria-labelledby="inspection-title">
+      <div class="wrap">
+        <div class="inspection-intro">
+          <p class="eyebrow">Hardware &amp; machine vision</p>
+          <h2 id="inspection-title">Manufacturing inspection</h2>
+          <p class="lede">Repeatable board positioning helps keep inspection images comparable. The fixture sets the location of the PCB, and the image explorer shows the kinds of features an inspection pipeline must learn to find.</p>
+          <p class="context">The fixture is an unbuilt CAD concept. The photographs and defect labels come from the public PCB-Defect dataset.</p>
+          <div class="actions">
+            <a class="button primary" href="#assembly">Explore 3D assembly</a>
+            <a class="button secondary" href="#pcb-labels">Review PCB defects</a>
+          </div>
+        </div>
+
+        <article class="inspection-module" id="assembly" aria-labelledby="assembly-title">
+          <div class="module-heading">
+            <h3 id="assembly-title">Modular PCB fixture</h3>
+            <p>Two fixed datum edges locate the board. Slotted fasteners and a compliant jaw accommodate width variation while leaving the board face accessible.</p>
+          </div>
+          <div class="tool-layout">
+            <figure class="evidence">
+              <div class="fixture-stage" id="fixture-stage">
+                <img id="fixture-poster" src="assets/inspection-fixture.webp" width="880" height="620" alt="Modular PCB fixture with a machined base, datum stops, compliant clamp and a cantilevered camera mount" loading="lazy">
+                <button class="button primary" id="open-fixture" type="button">Load 3D model</button>
+                <div id="fixture-canvas" hidden></div>
+              </div>
+              <div class="fixture-toolbar" id="fixture-controls" hidden>
+                <label>PCB configuration
+                  <select id="fixture-config">
+                    <option value="large">120 × 100 mm</option>
+                    <option value="small">80 × 60 mm</option>
+                  </select>
+                </label>
+                <label>Explode assembly
+                  <input id="fixture-explode" type="range" min="0" max="100" value="0">
+                </label>
+                <div class="actions">
+                  <button class="button mini" id="fixture-top" type="button">Top</button>
+                  <button class="button mini" id="fixture-reset" type="button">Reset view</button>
+                </div>
+              </div>
+              <figcaption id="fixture-status" role="status">Predefined board configurations share the same baseplate and datum stops.</figcaption>
+            </figure>
+            <div class="tool-panel">
+              <h4>Assembly components</h4>
+              <label for="fixture-part">Inspect a component</label>
+              <select id="fixture-part" disabled>
+                <option value="">All components</option>
+              </select>
+              <p id="fixture-part-note">Select a part from the list or click it on the model.</p>
+              <h4>CAD checks</h4>
+              <p>Verified support and datum contacts, clamp-hole clearance, and zero solid interference for both configurations. Camera and lens selection are pending.</p>
+              <h4>Width tolerance</h4>
+              <p>An assumed ±0.15 mm board width, ±0.10 mm datum location and ±0.10 mm clamp setup give a <strong>±0.35 mm worst-case edge offset</strong>. This estimate informs the required jaw travel.</p>
+            </div>
+          </div>
+          <div class="actions module-actions">
+            <a class="button secondary" href="assets/inspection-fixture-step.zip" download>Download both STEP assemblies</a>
+            <a class="text-link" href="assets/inspection-fixture-drawing.pdf">View concept drawing</a>
+            <a class="text-link" href="assets/inspection-fixture-bom.csv" download>Download BOM</a>
+          </div>
+        </article>
+
+        <article class="inspection-module" id="pcb-labels" aria-labelledby="pcb-title">
+          <div class="module-heading">
+            <h3 id="pcb-title">PCB defect annotation explorer</h3>
+            <p>Review the published labels for six defect classes. Select a box or list entry to inspect the corresponding area at higher magnification.</p>
+          </div>
+          <div class="tool-layout">
+            <figure class="evidence">
+              <div class="pcb-stage" id="pcb-stage">
+                <img id="pcb-image" src="assets/pcb-sample-076.webp" alt="Photograph of an etched single-layer PCB" width="1500" height="1090" loading="lazy">
+                <div id="pcb-boxes" class="pcb-boxes"></div>
+              </div>
+              <figcaption id="pcb-status" role="status">Published bounding boxes from the PCB-Defect dataset.</figcaption>
+            </figure>
+            <div class="tool-panel">
+              <label for="pcb-sample">Sample board</label>
+              <select id="pcb-sample" disabled></select>
+              <label for="pcb-filter">Defect class</label>
+              <select id="pcb-filter" disabled><option value="">All classes</option></select>
+              <label class="check-control"><input id="pcb-show" type="checkbox" checked disabled> Show source annotations</label>
+              <ul class="defect-list" id="pcb-list" aria-label="Published defect annotations"></ul>
+              <canvas id="pcb-detail" width="360" height="200" aria-label="Magnified view of the selected annotation" hidden></canvas>
+              <button class="button secondary" type="button" id="pcb-export" disabled>Export visible labels as CSV</button>
+            </div>
+          </div>
+          <p class="context attribution">This explorer displays human-labeled reference data for future detector development. Images resized and boxes overlaid from <a href="https://doi.org/10.17632/vdj74sngvn.1">PCB-Defect v1 by Rashid, Ullah, Isfara, Ahmed, Mian &amp; Shalehin</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="case-band">
+      <article class="wrap case" id="diamond" aria-labelledby="diamond-title">
+        <div class="case-copy">
+          <p class="eyebrow">University of British Columbia · 2019</p>
+          <h2 id="diamond-title">Sheet-Diamond lattice</h2>
+          <p class="lede">How does porosity change the compressive response of the same lattice topology?</p>
+          <dl>
+            <dt>Contribution</dt><dd>Co-authored the study and contributed to specimen preparation, mechanical characterization, and interpretation of deformation and fracture.</dd>
+            <dt>Published result</dt><dd>The low-porosity PLA group had about 3× the yield strength and 2.5× the modulus of the high-porosity group. The groups showed different failure modes.</dd>
+            <dt>Reconstructed model</dt><dd>The portfolio reconstruction uses an implicit Diamond surface clipped to a 20 mm cube. The 2 × 2 × 2 repeats and target porosities are demonstration settings. The STL exports were checked for watertightness and connectivity.</dd>
+          </dl>
+          <div class="actions">
+            <a class="button secondary" href="assets/sheet-diamond-models.zip" download>Download STL + source</a>
+            <a class="text-link" href="https://doi.org/10.1007/s42242-019-00054-7">Read the publication</a>
+          </div>
+        </div>
+        <figure class="evidence">
+          <img id="diamond-image" src="assets/porosity/70.webp" width="880" height="620" alt="Ivory Sheet-Diamond mesh at a nominal 70 percent void fraction" loading="lazy">
+          <div class="slider-panel">
+            <div class="slider-line">
+              <label for="diamond-porosity">Target porosity</label>
+              <output id="diamond-value" for="diamond-porosity">70%</output>
+            </div>
+            <input id="diamond-porosity" type="range" min="55" max="80" step="1" value="70" aria-valuetext="70 percent">
+            <div class="slider-endpoints" aria-hidden="true">
+              <span>55%</span><span>80%</span>
+            </div>
+          </div>
+          <figcaption>The slider selects precomputed geometry at 1% increments. The cube size and repeat count stay fixed.</figcaption>
+        </figure>
+      </article>
+    </div>
+
+    <article class="wrap case" id="coupon" aria-labelledby="coupon-title">
+      <div class="case-copy">
+        <p class="eyebrow">University of Toronto · M.Eng. project</p>
+        <h2 id="coupon-title">Conductive adhesive coupon</h2>
+        <p class="lede">A lap-joint specimen for measuring electrically conductive adhesive in shingled photovoltaic interconnects.</p>
+        <dl>
+          <dt>Design decision</dt><dd>Used a PCB lap joint with separate current and voltage-sense connections to keep lead resistance out of the voltage reading. The model uses the 20 × 15 mm PCB outline in the report.</dd>
+          <dt>Experimental work</dt><dd>Ran cyclic tests on six silicon-based specimens with copper grip extensions. The measurements showed differing resistance trends and exposed limits in acquisition speed and specimen handling.</dd>
+          <dt>CAD reconstruction</dt><dd>The STEP assembly shows the proposed PCB concept. Board stack-up, routing details, 3.50 mm overlap, and 0.10 mm adhesive thickness are modeled assumptions.</dd>
+        </dl>
+        <div class="actions">
+          <a class="button secondary" href="assets/eca-pcb-coupon.step" download>Download coupon STEP</a>
+        </div>
+      </div>
+      <div class="evidence-stack">
+        <figure class="evidence">
+          <img src="assets/coupon-exploded.webp" width="880" height="620" alt="Exploded lap-joint assembly with two green PCB substrates, copper traces, and a silver-gray adhesive layer" loading="lazy">
+          <figcaption>Exploded reconstruction of the proposed PCB coupon. Copper traces separate current and voltage-sense connections.</figcaption>
+        </figure>
+        <figure class="bench-photo evidence">
+          <img src="assets/ut-test-photo.webp" width="744" height="278" alt="Report photograph of a silicon test specimen on copper grip tabs with epoxy and yellow electrical leads" loading="lazy">
+          <figcaption>Silicon test specimen in the grips. Photograph from the M.Eng. report.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <div class="case-band">
+      <article class="wrap case" id="nest" aria-labelledby="nest-title">
+        <div class="case-copy">
+          <p class="eyebrow">Portfolio design study · Parametric CAD</p>
+          <h2 id="nest-title">Coupon handling nest</h2>
+          <p class="lede">A bench fixture concept for locating the reconstructed PCB coupon during assembly and inspection.</p>
+          <dl>
+            <dt>Design</dt><dd>Two pocket depths accommodate the offset lap joint. A central window exposes the bond area and removable keepers sit above the two coupon ends.</dd>
+            <dt>Manufacturing approach</dt><dd>The base is a CNC acetal concept with reliefs at the pocket corners and through bores accessible from one setup. The nominal pocket allows 0.25 mm lateral clearance per side.</dd>
+            <dt>Verification</dt><dd>Checked the envelope, seat clearance, access window, bore paths, and assembly interference in CAD. The concept was created with AI assistance for this portfolio and remains unbuilt.</dd>
+          </dl>
+          <div class="actions">
+            <a class="button secondary" href="assets/eca-handling-nest.step" download>Download assembly STEP</a>
+            <a class="text-link" href="assets/handling-nest-drawing.pdf">View dimensioned drawing</a>
+            <a class="text-link" href="assets/eca_models.py" download>Download parametric source</a>
+          </div>
+        </div>
+        <figure class="evidence">
+          <img id="nest-image" src="assets/nest-exploded.webp" width="880" height="620" alt="Exploded CAD view of the handling nest, lap-joint coupon, and two removable keepers" loading="lazy">
+          <div class="control-bar">
+            <span class="control-label">Assembly view</span>
+            <div class="segmented" role="group" aria-label="Handling nest assembly view">
+              <button type="button" data-nest="exploded" aria-pressed="true">Exploded</button>
+              <button type="button" data-nest="assembled" aria-pressed="false">Assembled</button>
+            </div>
+          </div>
+          <figcaption>Fixture base, reference coupon, and two removable keepers.</figcaption>
+        </figure>
+      </article>
+    </div>
+
+    <article class="wrap case rx-case" id="recrystallization" aria-labelledby="rx-title">
+      <div class="case-copy">
+        <p class="eyebrow">Carnegie Mellon University · Ph.D. research</p>
+        <h2 id="rx-title">Aluminum recrystallization</h2>
+        <p class="lede">Tracking grain and subgrain evolution in cold-rolled, high-purity aluminum during stepwise annealing.</p>
+        <dl>
+          <dt>Contribution</dt><dd>Designed and performed repeated EBSD mapping and developed a workflow combining dictionary indexing and MATLAB orientation processing.</dd>
+          <dt>What to look for</dt><dd>The inverse pole figure map (IPF-Z) uses color to distinguish orientations along the sample normal. In the orientation similarity map (OSM), track the bright recrystallized grains as they grow into the textured deformed matrix.</dd>
+          <dt>Sequence</dt><dd>Both views show the same field of view at 15 stages, from the initial state (t0) through 14 annealing steps at 200 °C (t1–t14).</dd>
+        </dl>
+        <div class="actions">
+          <a class="button secondary" href="assets/aluminum-recrystallization-osm.gif" download>Download OSM animation GIF</a>
+          <a class="button secondary" href="assets/aluminum-recrystallization-ipfz.gif" download>Download IPF-Z animation GIF</a>
+        </div>
+      </div>
+      <figure class="evidence rx" id="rx-player">
+        <div class="control-bar">
+          <button type="button" id="rx-play" class="button mini">Play</button>
+          <label class="sr-only" for="rx-range">Recorded EBSD stage</label>
+          <input id="rx-range" type="range" value="0" min="0" max="14" aria-valuetext="Stage t0 of t0–t14">
+          <output for="rx-range" id="rx-stage" aria-live="off">t0 / t14</output>
+        </div>
+        <div class="rx-pair">
+          <div class="rx-view">
+            <h3>Inverse pole figure <span>IPF-Z</span></h3>
+            <div class="rx-map">
+              <img data-rx-map="ipfz" src="assets/rx-ipfz-0.webp" width="1144" height="858" alt="EBSD inverse pole figure map at stage t0" loading="lazy">
+              <span class="rx-scale">200 µm</span>
+            </div>
+          </div>
+          <div class="rx-view">
+            <h3>Orientation similarity map <span>OSM</span></h3>
+            <div class="rx-map">
+              <img data-rx-map="osm" src="assets/rx-osm-0.webp" width="1144" height="858" alt="EBSD orientation similarity map at stage t0" loading="lazy">
+              <span class="rx-scale">200 µm</span>
+            </div>
+          </div>
+        </div>
+        <figcaption>Same large field of view in both maps. EBSD step size was 1 µm.</figcaption>
+      </figure>
+    </article>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="wrap about-inner">
+        <div>
+          <p class="eyebrow">About</p>
+          <h2 id="about-title">Zehua Liu</h2>
+          <p>I work on materials and manufacturing problems where design choices can be verified through testing and characterization. My experience spans electronics packaging R&amp;D, experimental reliability, and microscopy-based materials research.</p>
+          <div class="actions">
+            <a class="button primary" href="https://www.linkedin.com/in/zehualiu-cmu">Connect on LinkedIn</a>
+          </div>
+        </div>
+        <div class="education" aria-label="Education">
+          <p><strong>Carnegie Mellon University</strong><span>Ph.D. research, Materials Science and Engineering</span></p>
+          <p><strong>University of Toronto</strong><span>M.Eng., Materials Science and Engineering</span></p>
+          <p><strong>University of British Columbia</strong><span>B.A.Sc., Materials Engineering</span></p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><div class="wrap"><span>Zehua Liu · Engineering Portfolio</span><a href="#">Back to top</a></div></footer>
+</body>
+</html>

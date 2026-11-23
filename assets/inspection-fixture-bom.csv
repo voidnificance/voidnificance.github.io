@@ -1,0 +1,12 @@
+Component,Quantity,Proposed material,Proposed process,Function
+Baseplate,1,6061 aluminum,CNC milling,Common mounting plane and two clamp hole patterns
+Front support rail,1,Acetal,CNC milling,Supports the PCB underside
+Rear support rail,1,Acetal,CNC milling,Supports the PCB underside
+X datum stop,1,6061 aluminum,CNC milling,Locates the left board edge
+Y datum stop,1,6061 aluminum,CNC milling,Locates the front board edge
+Sliding clamp,1,6061 aluminum,CNC milling,Slots provide adjustment at each hole pattern
+Compliant tip,1,TPU,FDM prototype,Pushes toward the X datum while protecting the edge
+Reference PCB,1,FR-4,Reference only,Represents the selected board envelope
+Camera mast,1,6061 aluminum,Fabricated assembly,Supports the cantilevered camera arm
+Camera arm,1,6061 aluminum,CNC milling,Cantilever over the inspection area
+Slotted camera plate,1,6061 aluminum,CNC milling,Provisional camera interface

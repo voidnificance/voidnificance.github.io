@@ -1,0 +1,215 @@
+[
+  {
+    "file": "pcb_defect_076.jpg",
+    "asset": "pcb-sample-076.webp",
+    "width": 2732,
+    "height": 1986,
+    "defects": [
+      {
+        "label": "spurious copper",
+        "bbox": [
+          585,
+          1784,
+          532.34,
+          68.98
+        ]
+      },
+      {
+        "label": "spurious copper",
+        "bbox": [
+          209,
+          1297,
+          51.8,
+          309.48
+        ]
+      },
+      {
+        "label": "short circuit",
+        "bbox": [
+          1196,
+          1628,
+          77.61,
+          84.66
+        ]
+      },
+      {
+        "label": "spur",
+        "bbox": [
+          1180,
+          1176,
+          93.85,
+          71.3
+        ]
+      },
+      {
+        "label": "mouse bite",
+        "bbox": [
+          839,
+          670,
+          99.75,
+          50.84
+        ]
+      },
+      {
+        "label": "open circuit",
+        "bbox": [
+          1790,
+          270,
+          106.74,
+          34.86
+        ]
+      },
+      {
+        "label": "missing pad",
+        "bbox": [
+          1261,
+          1043,
+          119.17,
+          95.41
+        ]
+      }
+    ]
+  },
+  {
+    "file": "pcb_defect_067.jpg",
+    "asset": "pcb-sample-067.webp",
+    "width": 2756,
+    "height": 2538,
+    "defects": [
+      {
+        "label": "short circuit",
+        "bbox": [
+          830,
+          2173,
+          82.52,
+          123.84
+        ]
+      },
+      {
+        "label": "spur",
+        "bbox": [
+          295,
+          1362,
+          103.18,
+          105.24
+        ]
+      },
+      {
+        "label": "mouse bite",
+        "bbox": [
+          1659,
+          1879,
+          70.53,
+          61.25
+        ]
+      },
+      {
+        "label": "missing pad",
+        "bbox": [
+          2406,
+          247,
+          118.36,
+          103.96
+        ]
+      },
+      {
+        "label": "open circuit",
+        "bbox": [
+          522,
+          398,
+          91.49,
+          46.53
+        ]
+      },
+      {
+        "label": "spurious copper",
+        "bbox": [
+          1399,
+          215,
+          180.98,
+          44.21
+        ]
+      },
+      {
+        "label": "mouse bite",
+        "bbox": [
+          2271,
+          2190,
+          31.99,
+          83.59
+        ]
+      }
+    ]
+  },
+  {
+    "file": "pcb_defect_144.jpg",
+    "asset": "pcb-sample-144.webp",
+    "width": 1953,
+    "height": 1824,
+    "defects": [
+      {
+        "label": "spur",
+        "bbox": [
+          644,
+          605,
+          73.45,
+          72.53
+        ]
+      },
+      {
+        "label": "missing pad",
+        "bbox": [
+          1538,
+          491,
+          63.81,
+          90.15
+        ]
+      },
+      {
+        "label": "spurious copper",
+        "bbox": [
+          1744,
+          415,
+          47.77,
+          515.12
+        ]
+      },
+      {
+        "label": "open circuit",
+        "bbox": [
+          1238,
+          123,
+          59.3,
+          48.85
+        ]
+      },
+      {
+        "label": "spur",
+        "bbox": [
+          536,
+          1601,
+          57.32,
+          55.03
+        ]
+      },
+      {
+        "label": "mouse bite",
+        "bbox": [
+          877,
+          1257,
+          52.93,
+          59.22
+        ]
+      },
+      {
+        "label": "short circuit",
+        "bbox": [
+          141,
+          1009,
+          87.58,
+          49.46
+        ]
+      }
+    ]
+  }
+]
